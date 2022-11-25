@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 function App() {
+  const [urlData, setURLData] = useState(null);
+  const fetchURLData = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    setURLData(null);
+    const value = event.target.value;
+    if (!value) {
+      return;
+    }
+
+    try {
+      const urlDataResponse = await axios.post("http://localhost:4000/fetch", {
+        url: value,
+      });
+
+      const responseData = urlDataResponse.data;
+
+      if (responseData.parsedTags) {
+        setURLData({ ...responseData.parsedTags, url: responseData.url });
+      }
+    } catch (err) {
+      setURLData(null);
+    }
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label className="url-preview-container">
+        {urlData && (
+          <div className="url-preview">
+            <img src={urlData["og:image"]} />
+            <div>
+              <a href={urlData['url']} target="_blank" className="og-title">{urlData["og:title"]}</a>
+              <p className="og-description truncate">{urlData["og:description"]}</p>
+            </div>
+          </div>
+        )}
+        <input onChange={fetchURLData} placeholder="Enter URL"/>
+      </label>
     </div>
   );
 }

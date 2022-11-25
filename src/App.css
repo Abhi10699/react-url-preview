@@ -1,5 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-logo {
@@ -35,4 +47,71 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+
+.url-preview-container {
+  width: fit-content;
+  max-width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  
+}
+/* 
+.url-preview-container > input {
+  margin-top: 10px;
+} */
+
+.url-preview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 6px;
+  background-color: gainsboro;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.url-preview > img {
+  width: 60px;
+  height: 60px;
+}
+
+.url-preview > div {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 10px;
+
+}
+
+.link {
+  text-decoration: none; 
+  color:gray;
+  font-size: x-small;
+}
+
+.og-title {
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.og-description {
+  font-weight: lighter;
+  font-size: smaller;
+  margin-top: 4px;
+}
+
+input {
+  padding:10px;
 }
